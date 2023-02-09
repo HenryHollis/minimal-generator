@@ -32,7 +32,7 @@ function plotGenerators(C, d, k, plotAllGens = false)
 		pttype = "scatter3d"
 		zpt = pc[3,:]
 	end
-	T[1] = Plotly.scatter(;x=pc[1,:], y=pc[2,:],
+	T[1] = PlotlyJS.scatter(;x=pc[1,:], y=pc[2,:],
 					 z = zpt,
 					 mode = "markers",
 					 type = pttype,
@@ -53,7 +53,7 @@ function plotGenerators(C, d, k, plotAllGens = false)
 			else
 				zp = zpts[i,:] #append!(zpts[i,:], sum(zpts[i,:])/2)
 			end
-			T[count] = Plotly.scatter(
+			T[count] = PlotlyJS.scatter(
 					  x = xpts[i,:], #append!(xpts[i,:], sum(xpts[i,:])/2),
 					  y = ypts[i,:], #append!(ypts[i,:], sum(ypts[i,:])/2),
 					  z = zp,
@@ -128,7 +128,7 @@ function plotMinimalGenerators(C, d, gens, title)
 		pttype = "scatter3d"
 		zpt = pc[3,:]
 	end
-	T[1] = Plotly.scatter(;x=pc[1,:], y=pc[2,:],
+	T[1] = PlotlyJS.scatter(;x=pc[1,:], y=pc[2,:],
 					 z = zpt,
 					 mode = "markers",
 					 type = pttype,
@@ -150,7 +150,7 @@ function plotMinimalGenerators(C, d, gens, title)
 			else
 				zp = append!(zpts[i,:], sum(zpts[i,:])/2)
 			end
-			T[count] = Plotly.scatter(
+			T[count] = PlotlyJS.scatter(
 					  x = append!(xpts[i,:], sum(xpts[i,:])/2),
 					  y = append!(ypts[i,:], sum(ypts[i,:])/2),
 					  z = zp,
@@ -194,7 +194,7 @@ function plotBarCode(C, maxdim = 1)
 	T = Array{GenericTrace{Dict{Symbol, Any}}}(undef, total)
 	y = 1
 	for j in 1: (length(C.barCode[1])-1)
-		T[y] = Plotly.scatter(
+		T[y] = PlotlyJS.scatter(
 				  x = C.barCode[1][j],
 				  y = [y,y],
 				  mode="lines+text",
@@ -208,7 +208,7 @@ function plotBarCode(C, maxdim = 1)
 				  )
 		y += 1
 	end
-	T[y] = Plotly.scatter(
+	T[y] = PlotlyJS.scatter(
 			  x = C.barCode[1][length(C.barCode[1])],
 			  y = [y,y],
 			  mode="lines+text",
@@ -223,7 +223,7 @@ function plotBarCode(C, maxdim = 1)
 	t = 1
 	if maxdim == 2
 		for k in 1:(length(C.barCode[2]) - 1)
-			T[t + y] = Plotly.scatter(
+			T[t + y] = PlotlyJS.scatter(
 					  x = C.barCode[2][k],
 					  y = [y + t, y + t],
 					  mode="lines+text",
@@ -239,7 +239,7 @@ function plotBarCode(C, maxdim = 1)
 		end
 		print("sth")
 		printval(C.barCode[2][t], "start")
-		T[t + y] = Plotly.scatter(
+		T[t + y] = PlotlyJS.scatter(
 				  x = C.barCode[2][t],
 				  y = [y + t,y + t],
 				  mode="lines+text",
@@ -282,7 +282,7 @@ function plotGeneratorin2D(C, d, k, plotAllGens = false)
 	end
 	T = Array{GenericTrace{Dict{Symbol, Any}}}(undef, sum(total) + 1)
 
-	T[1] = Plotly.scatter(;x=pc[1,:], y=pc[2,:],
+	T[1] = PlotlyJS.scatter(;x=pc[1,:], y=pc[2,:],
 					 mode = "markers",
 					 type = "scatter",
 					 name = "point cloud",
@@ -293,7 +293,7 @@ function plotGeneratorin2D(C, d, k, plotAllGens = false)
 		xpts = pc[1,ab]
 		ypts = pc[2,ab]
 		for i in 1: total[j]
-			T[count] = Plotly.scatter(
+			T[count] = PlotlyJS.scatter(
 					  x = append!(xpts[i,:], sum(xpts[i,:])/2),
 					  y = append!(ypts[i,:], sum(ypts[i,:])/2),
 		              mode="lines+text",
