@@ -1,3 +1,4 @@
+using Pkg
 Pkg.add(["MultivariateStats", "Plots", "DelimitedFiles","CSV", "DataFrames", "StatsBase", "Distances", "JuMP", "Clp", "GLPK",  "JLD", "ORCA", "LinearAlgebra", "SparseArrays", "Random", "Distributions", "Gurobi"])
 Pkg.add(url="https://github.com/jonas-kr/PlotlyJS.jl#generate-artifacts")
 Pkg.build("Gurobi")
