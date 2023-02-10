@@ -1,7 +1,7 @@
 
 
 ######### visualize in 3D
-function plotGenerators(C, d, k, plotAllGens = false)
+function plotGenerators(C, d, k,text_labels, plotAllGens = false)
 	"""
 	Takes in a homologyObject C,
 	d   --> dimension of the generator to visualize
@@ -37,8 +37,9 @@ function plotGenerators(C, d, k, plotAllGens = false)
 					 mode = "markers",
 					 type = pttype,
 					 name = "point cloud",
-					 hoverinfo="skip",
-					 maker_size = 10)
+					 hoverinfo="text",
+					 text = text_labels,
+					 marker_size = 6)
 	count = 2
 	for j in 1: length(total)
 		ab = transpose(C.permutedlverts[d + 1][:,findall(x -> x!=0, C.generators[d][k])])
@@ -61,7 +62,7 @@ function plotGenerators(C, d, k, plotAllGens = false)
 					  type=pttype,
 		              name=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
 					  fill="toself",
-					  maker_size = 10,
+					  marker_size = 6,
 					  hovertext=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
 					  hoverinfo = ["skip", "skip", "text"],
 					  )
