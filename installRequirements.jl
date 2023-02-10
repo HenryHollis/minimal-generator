@@ -1,9 +1,9 @@
-Pkg.add(["MultivariateStats", "Plots", "DelimitedFiles", "StatsBase", "Distances", "JuMP", "Clp", "GLPK",  "JLD", "ORCA", "LinearAlgebra", "Eirene", "SparseArrays", "Random", "Distributions", "Gurobi"])
+Pkg.add(["MultivariateStats", "Plots", "DelimitedFiles","CSV", "DataFrames", "StatsBase", "Distances", "JuMP", "Clp", "GLPK",  "JLD", "ORCA", "LinearAlgebra", "SparseArrays", "Random", "Distributions", "Gurobi"])
 Pkg.add(url="https://github.com/jonas-kr/PlotlyJS.jl#generate-artifacts")
 Pkg.build("Gurobi")
 Pkg.add("SparseArrays")
 using SparseArrays
-using MultivariateStats,  Distances, DelimitedFiles, StatsBase, Distances, JuMP, PlotlyJS, JLD, ORCA, LinearAlgebra, Eirene, SparseArrays, Random, Distributions, SparseArrays, Gurobi, GLPK
+using MultivariateStats,  Distances, DelimitedFiles, Statistics, CSV, StatsBase, DataFrames,Distances, JuMP, PlotlyJS, JLD, ORCA, LinearAlgebra, Eirene, SparseArrays, Random, Distributions, SparseArrays, Gurobi, GLPK
 using Plots
 include("computePH.jl")
 include("utilFunctions.jl")
