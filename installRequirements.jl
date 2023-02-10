@@ -1,5 +1,5 @@
 Pkg.add(["MultivariateStats", "Plots", "DelimitedFiles", "StatsBase", "Distances", "JuMP", "Clp", "GLPK",  "JLD", "ORCA", "LinearAlgebra", "Eirene", "SparseArrays", "Random", "Distributions", "Gurobi"])
-Pkg.add(url=""https://github.com/jonas-kr/PlotlyJS.jl#generate-artifacts")
+Pkg.add(url="https://github.com/jonas-kr/PlotlyJS.jl#generate-artifacts")
 Pkg.build("Gurobi")
 Pkg.add("SparseArrays")
 using SparseArrays
