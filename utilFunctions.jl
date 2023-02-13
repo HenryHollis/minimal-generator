@@ -40,28 +40,17 @@ function plotGenerators(C, d, k,text_labels, plotAllGens = false)
 	"""
 	gens = C.generators[d]
 	pc = C.pointCloud
-	if size(pc, 1) == 2
-		is2D = true
-	else
-		is2D = false
-	end
-	if plotAllGens
-		total = Array{Int64}(undef, length(gens))
-		for i in 1:length(gens)
-			total[i]= length(C.generators[d][i].rowval)
-		end
-	else
-		total = Array{Int64}(undef, 1)
-		total[1]= length(C.generators[d][k].rowval)
-	end
+
+	is2D = false
+
+
+	total = Array{Int64}(undef, 1)
+	total[1]= length(C.generators[d][k].rowval)
+
 	T = Array{GenericTrace{Dict{Symbol, Any}}}(undef, sum(total) + 1)
-	if is2D
-		pttype = "scatter"
-		zpt = ones(1, size(pc, 2))
-	else
-		pttype = "scatter3d"
-		zpt = pc[3,:]
-	end
+	pttype = "scatter3d"
+	zpt = pc[3,:]
+	
 	T[1] = PlotlyJS.scatter(;x=pc[1,:], y=pc[2,:],
 					 z = zpt,
 					 mode = "markers",
@@ -79,34 +68,30 @@ function plotGenerators(C, d, k,text_labels, plotAllGens = false)
 			zpts = pc[3,ab]
 		end
 		for i in 1: total[j]
-			if is2D
-				zp = ones(1, 3)
-			else
-				zp = zpts[i,:] #append!(zpts[i,:], sum(zpts[i,:])/2)
-			end
+			zp = zpts[i,:] #append!(zpts[i,:], sum(zpts[i,:])/2)
+			
 			T[count] = PlotlyJS.scatter(
 					  x = xpts[i,:], #append!(xpts[i,:], sum(xpts[i,:])/2),
 					  y = ypts[i,:], #append!(ypts[i,:], sum(ypts[i,:])/2),
 					  z = zp,
 		              mode="lines+text",
 					  type=pttype,
-		              name=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
+		              #name=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
 					  fill="toself",
 					   marker=attr(
-						color="red",
-						size=6,
-					    ),
+						size=6
+					   ),
 					  hovertext=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
 					  hoverinfo = ["skip", "skip", "text"],
+					  name=euclidean([xpts[i,1],ypts[i,1]], [xpts[i,2],ypts[i,2]]),
+					
 					  )
 			count += 1
 		end
 	end
-	if is2D
-		zrange = [-1,1]
-	else
-		zrange = [1.2 * (minimum(pc[3,:]) - 0.01), 1.2 * (maximum(pc[3,:]) + 0.01)]
-	end
+
+	zrange = [1.2 * (minimum(pc[3,:]) - 0.01), 1.2 * (maximum(pc[3,:]) + 0.01)]
+	
 	layout = Layout(;title="Generators!",
 	                 xaxis_range=[1.2 * (minimum(pc[1,:]) - 0.01), 1.2 * (maximum(pc[1,:]) + 0.01)],
 	                 yaxis_range=[1.2 * (minimum(pc[2,:]) - 0.01), 1.2 * (maximum(pc[2,:]) + 0.01)],
