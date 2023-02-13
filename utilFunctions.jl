@@ -93,7 +93,7 @@ function plotGenerators(C, d, k,text_labels, plotAllGens = false)
 		              name=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
 					  fill="toself",
 					   marker=attr(
-						color="LightSkyBlue",
+						color="red",
 						size=6,
 					    ),
 					  hovertext=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
