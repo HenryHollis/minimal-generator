@@ -1,34 +1,34 @@
 
-Function cycleRep(C, d, k, text_labels)
+# Function cycleRep(C, d, k, text_labels)
 
-	gens = C.generators[d]
-	pc = C.pointCloud
-	total = Array{Int64}(undef, 1)
-	total[1]= length(C.generators[d][k].rowval)
-	for j in 1: length(total)
-		ab = transpose(C.permutedlverts[d + 1][:,findall(x -> x!=0, C.generators[d][k])])
-		xpts = pc[1,ab]
-		ypts = pc[2,ab]
-		zpts = pc[3,ab]
-		for i in 1: total[j]
-			zp = zpts[i,:] #append!(zpts[i,:], sum(zpts[i,:])/2)
+# 	gens = C.generators[d]
+# 	pc = C.pointCloud
+# 	total = Array{Int64}(undef, 1)
+# 	total[1]= length(C.generators[d][k].rowval)
+# 	for j in 1: length(total)
+# 		ab = transpose(C.permutedlverts[d + 1][:,findall(x -> x!=0, C.generators[d][k])])
+# 		xpts = pc[1,ab]
+# 		ypts = pc[2,ab]
+# 		zpts = pc[3,ab]
+# 		for i in 1: total[j]
+# 			zp = zpts[i,:] #append!(zpts[i,:], sum(zpts[i,:])/2)
 
-			T[count] = PlotlyJS.scatter(
-					  x = xpts[i,:], #append!(xpts[i,:], sum(xpts[i,:])/2),
-					  y = ypts[i,:], #append!(ypts[i,:], sum(ypts[i,:])/2),
-					  z = zp,
-		              mode="lines+text",
-					  type=pttype,
-		              name=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
-					  fill="toself",
-					  marker_size = 6,
-					  hovertext=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
-					  hoverinfo = ["skip", "skip", "text"],
-					  )
-			count += 1
-		end
-	end
-end
+# 			T[count] = PlotlyJS.scatter(
+# 					  x = xpts[i,:], #append!(xpts[i,:], sum(xpts[i,:])/2),
+# 					  y = ypts[i,:], #append!(ypts[i,:], sum(ypts[i,:])/2),
+# 					  z = zp,
+# 		              mode="lines+text",
+# 					  type=pttype,
+# 		              name=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
+# 					  fill="toself",
+# 					  marker_size = 6,
+# 					  hovertext=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
+# 					  hoverinfo = ["skip", "skip", "text"],
+# 					  )
+# 			count += 1
+# 		end
+# 	end
+# end
 
 ######### visualize in 3D
 function plotGenerators(C, d, k,text_labels, plotAllGens = false)
@@ -92,7 +92,10 @@ function plotGenerators(C, d, k,text_labels, plotAllGens = false)
 					  type=pttype,
 		              name=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
 					  fill="toself",
-					  marker_size = 6,
+					   marker=attr(
+						color="LightSkyBlue",
+						size=6)
+					    ),
 					  hovertext=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
 					  hoverinfo = ["skip", "skip", "text"],
 					  )
