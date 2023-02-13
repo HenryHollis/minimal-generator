@@ -94,7 +94,7 @@ function plotGenerators(C, d, k,text_labels, plotAllGens = false)
 					  fill="toself",
 					   marker=attr(
 						color="LightSkyBlue",
-						size=6)
+						size=6,
 					    ),
 					  hovertext=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
 					  hoverinfo = ["skip", "skip", "text"],
