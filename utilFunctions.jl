@@ -489,7 +489,7 @@ function C_d_k__prowind(C, d, k)
 		println("Invalid row index k.")
 		return
 	end
-	return prowa_D[k]
+	return prowa_d[k]
 end
 
 function C_d_k__pcolind(C, d, k)
