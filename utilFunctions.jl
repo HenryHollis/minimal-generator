@@ -604,7 +604,7 @@ function findArea(points)
 	b = euclidean(points[:,1], points[:,3])
 	c = euclidean(points[:,2], points[:,3])
 	s = (a + b + c)/2
-	area = sqrt(s * (s-a) * (s-b) * (s - c))
+	area = sqrt(abs(s * (s-a) * (s-b) * (s - c)))
 	return area
 end
 
