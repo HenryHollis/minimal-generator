@@ -3,6 +3,7 @@ Pkg.add(["MultivariateStats", "Plots", "DelimitedFiles","CSV", "DataFrames", "St
 Pkg.add(url="https://github.com/jonas-kr/PlotlyJS.jl#generate-artifacts")
 Pkg.build("Gurobi")
 Pkg.add("SparseArrays")
+ENV["GUROBI_HOME"] = "/Library/gurobi912/mac64"
 using SparseArrays
 using MultivariateStats,  Distances, DelimitedFiles, Statistics, CSV, StatsBase, DataFrames,Distances, JuMP, PlotlyJS, JLD, ORCA, LinearAlgebra, Eirene, SparseArrays, Random, Distributions, SparseArrays, Gurobi, GLPK
 using Plots
