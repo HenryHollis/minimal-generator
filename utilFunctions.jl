@@ -4,6 +4,13 @@ function cycleRep(C, d, k, text_labels)
 	verts_in_gen = C.permutedhverts[d][:, simplices_in_gen]
 	gene_names[unique(vec(verts_in_gen))]
 end
+		
+		
+function cycleRep(C, minGen, text_labels)
+	simplices_in_gen = findnz(minGen)[1]
+	verts_in_gen = C.permutedhverts[d][:, simplices_in_gen]
+	gene_names[unique(vec(verts_in_gen))]
+end
 
 ######### visualize in 3D
 function plotGenerators(C, d, k,text_labels, plotAllGens = false)
