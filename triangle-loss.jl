@@ -71,8 +71,8 @@ end
 
 
 function volumeOptimize(D, d, l, dd, triVerts, secondTime, positive, Area, integer = false)
-
-	numEdges = size(dd, 1)
+    dd = convert(SparseMatrixCSC{Int64} , dd)
+    numEdges = size(dd, 1)
     xlen = size(dd,2)
     zlen = 1
 	ylen = xlen  -zlen
