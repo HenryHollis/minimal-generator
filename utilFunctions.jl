@@ -43,7 +43,7 @@ function plotGenerators(C, d, k, plotAllGens = false)
 		pttype = "scatter3d"
 		zpt = pc[3,:]
 	end
-	T[1] = Plotly.scatter(;x=pc[1,:], y=pc[2,:],
+	T[1] = PlotlyJS.scatter(;x=pc[1,:], y=pc[2,:],
 					 z = zpt,
 					 mode = "markers",
 					 type = pttype,
@@ -64,7 +64,7 @@ function plotGenerators(C, d, k, plotAllGens = false)
 			else
 				zp = zpts[i,:] #append!(zpts[i,:], sum(zpts[i,:])/2)
 			end
-			T[count] = Plotly.scatter(
+			T[count] = PlotlyJS.scatter(
 					  x = xpts[i,:], #append!(xpts[i,:], sum(xpts[i,:])/2),
 					  y = ypts[i,:], #append!(ypts[i,:], sum(ypts[i,:])/2),
 					  z = zp,
