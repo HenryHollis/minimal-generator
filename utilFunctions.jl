@@ -12,6 +12,85 @@ function cycleRep(C, minGen, text_labels)
 	gene_names[unique(vec(verts_in_gen))]
 end
 
+function plotGenerators(C, d, k, plotAllGens = false)
+	"""
+	Takes in a homologyObject C,
+	d   --> dimension of the generator to visualize
+	k   --> the class number of the generator you want to plot
+	all --> true if you want to plot all generators in one plot.
+	"""
+	gens = C.generators[d]
+	pc = C.pointCloud
+	if size(pc, 1) == 2
+		is2D = true
+	else
+		is2D = false
+	end
+	if plotAllGens
+		total = Array{Int64}(undef, length(gens))
+		for i in 1:length(gens)
+			total[i]= length(C.generators[d][i].rowval)
+		end
+	else
+		total = Array{Int64}(undef, 1)
+		total[1]= length(C.generators[d][k].rowval)
+	end
+	T = Array{GenericTrace{Dict{Symbol, Any}}}(undef, sum(total) + 1)
+	if is2D
+		pttype = "scatter"
+		zpt = ones(1, size(pc, 2))
+	else
+		pttype = "scatter3d"
+		zpt = pc[3,:]
+	end
+	T[1] = Plotly.scatter(;x=pc[1,:], y=pc[2,:],
+					 z = zpt,
+					 mode = "markers",
+					 type = pttype,
+					 name = "point cloud",
+					 hoverinfo="skip",
+					 maker_size = 10)
+	count = 2
+	for j in 1: length(total)
+		ab = transpose(C.permutedlverts[d + 1][:,findall(x -> x!=0, C.generators[d][k])])
+		xpts = pc[1,ab]
+		ypts = pc[2,ab]
+		if !is2D
+			zpts = pc[3,ab]
+		end
+		for i in 1: total[j]
+			if is2D
+				zp = ones(1, 3)
+			else
+				zp = zpts[i,:] #append!(zpts[i,:], sum(zpts[i,:])/2)
+			end
+			T[count] = Plotly.scatter(
+					  x = xpts[i,:], #append!(xpts[i,:], sum(xpts[i,:])/2),
+					  y = ypts[i,:], #append!(ypts[i,:], sum(ypts[i,:])/2),
+					  z = zp,
+		              mode="lines+text",
+					  type=pttype,
+		              name=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
+					  fill="toself",
+					  maker_size = 10,
+					  hovertext=round(C.distVec[C.grainVec[d+1][i]]; digits=4),
+					  hoverinfo = ["skip", "skip", "text"],
+					  )
+			count += 1
+		end
+	end
+	if is2D
+		zrange = [-1,1]
+	else
+		zrange = [1.2 * (minimum(pc[3,:]) - 0.01), 1.2 * (maximum(pc[3,:]) + 0.01)]
+	end
+	layout = Layout(;title="Generators!",
+	                 xaxis_range=[1.2 * (minimum(pc[1,:]) - 0.01), 1.2 * (maximum(pc[1,:]) + 0.01)],
+	                 yaxis_range=[1.2 * (minimum(pc[2,:]) - 0.01), 1.2 * (maximum(pc[2,:]) + 0.01)],
+					 zaxis_range= zrange)
+	return PlotlyJS.plot(T, layout)
+end				
+				
 ######### visualize in 3D
 function plotGenerators(C, d, k,text_labels, plotAllGens = false)
 	"""
